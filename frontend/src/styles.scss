@@ -1,0 +1,39 @@
+/* Estilos globales: base de página y utilidades compartidas por las pantallas */
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #f5f6f8;
+}
+
+/* Contenedor de cada pantalla */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.page-title {
+  margin: 0 0 4px;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.page-subtitle {
+  margin: 0 0 24px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Las tablas anchas se desplazan dentro de su tarjeta, no la página entera */
+.table-container {
+  overflow-x: auto;
+}
+
+/* Avisos del interceptor de errores */
+.snackbar-error {
+  --mdc-snackbar-container-color: #b3261e;
+  --mdc-snackbar-supporting-text-color: #fff;
+  --mat-snack-bar-button-color: #fff;
+}

@@ -1,0 +1,24 @@
+/* Barra en el color primario del tema (Material 3 ya no admite color="primary") */
+.toolbar {
+  --mat-toolbar-container-background-color: #005cbb;
+  --mat-toolbar-container-text-color: #fff;
+  --mdc-text-button-label-text-color: #fff;
+
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  gap: 24px;
+}
+
+.brand {
+  font-weight: 500;
+}
+
+.nav {
+  display: flex;
+  gap: 4px;
+}
+
+.nav a.active {
+  background: rgba(255, 255, 255, 0.18);
+}

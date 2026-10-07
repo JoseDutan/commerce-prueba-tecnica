@@ -1,0 +1,16 @@
+<mat-toolbar class="toolbar">
+  <span class="brand">Comercios</span>
+
+  <nav class="nav" aria-label="Navegación principal">
+    @for (link of links; track link.path) {
+      <a mat-button [routerLink]="link.path" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <mat-icon>{{ link.icon }}</mat-icon>
+        {{ link.label }}
+      </a>
+    }
+  </nav>
+</mat-toolbar>
+
+<main>
+  <router-outlet />
+</main>
