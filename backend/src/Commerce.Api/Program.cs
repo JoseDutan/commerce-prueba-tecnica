@@ -1,0 +1,48 @@
+using System.Reflection;
+using Commerce.Api.Middleware;
+using Commerce.Api.Options;
+using Commerce.Api.Repositories;
+using Commerce.Api.Services;
+
+const string CorsPolicy = "Frontend";
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+
+// Swagger / OpenAPI, documentado con los comentarios XML del código
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFile));
+});
+
+// CORS: solo los orígenes configurados (el front Angular en desarrollo)
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
+builder.Services.AddCors(options => options.AddPolicy(CorsPolicy, policy =>
+    policy.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod()));
+
+builder.Services.Configure<CsvOptions>(builder.Configuration.GetSection(CsvOptions.SectionName));
+
+// Inyección de dependencias por capa
+builder.Services.AddSingleton<IDbConnectionFactory, SqlConnectionFactory>();
+builder.Services.AddSingleton<ICsvCommerceParser, CsvCommerceParser>();
+builder.Services.AddScoped<ICommerceRepository, CommerceRepository>();
+builder.Services.AddScoped<ICommerceService, CommerceService>();
+
+var app = builder.Build();
+
+// Primero en el pipeline para capturar los errores de todo lo que viene después
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseCors(CorsPolicy);
+app.MapControllers();
+
+app.Run();
