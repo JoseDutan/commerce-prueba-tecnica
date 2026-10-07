@@ -1,0 +1,56 @@
+.upload-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+/* El input nativo se oculta; lo abre el botón "Seleccionar archivo" */
+.file-input {
+  display: none;
+}
+
+.file-name {
+  font-weight: 500;
+
+  &.placeholder {
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.spacer {
+  flex: 1;
+}
+
+.message {
+  margin: 12px 0 0;
+
+  &.error {
+    color: #b3261e;
+  }
+}
+
+ul.message {
+  padding-left: 20px;
+}
+
+.result,
+.preview {
+  margin-top: 16px;
+}
+
+.result-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.result-icon {
+  color: #1b7f3b;
+}
+
+th.mat-mdc-header-cell,
+td.mat-mdc-cell {
+  white-space: nowrap;
+}

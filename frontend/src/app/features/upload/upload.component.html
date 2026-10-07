@@ -1,0 +1,116 @@
+<section class="page">
+  <h1 class="page-title">Carga de archivo</h1>
+  <p class="page-subtitle">
+    Seleccione el archivo <code>commerce_DDMMYYYY.csv</code>, revise su contenido y envíelo.
+  </p>
+
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()" class="upload-form">
+        <input
+          #fileInput
+          type="file"
+          accept=".csv,text/csv"
+          class="file-input"
+          aria-label="Archivo CSV de comercios"
+          (change)="onFileSelected($event)"
+        />
+
+        <button mat-stroked-button type="button" [disabled]="uploading()" (click)="fileInput.click()">
+          <mat-icon>attach_file</mat-icon>
+          Seleccionar archivo
+        </button>
+
+        <span class="file-name" [class.placeholder]="!fileControl.value">
+          {{ fileControl.value?.name ?? 'Ningún archivo seleccionado' }}
+        </span>
+
+        <span class="spacer"></span>
+
+        @if (fileControl.value) {
+          <button mat-button type="button" [disabled]="uploading()" (click)="clear()">Limpiar</button>
+        }
+        <button mat-flat-button type="submit" [disabled]="form.invalid || !preview() || uploading()">
+          <mat-icon>cloud_upload</mat-icon>
+          {{ uploading() ? 'Enviando…' : 'Enviar' }}
+        </button>
+      </form>
+
+      @if (fileControl.touched && fileControl.hasError('fileName')) {
+        <p class="message error" role="alert">
+          El nombre debe tener el formato commerce_DDMMYYYY.csv con una fecha válida.
+        </p>
+      } @else if (fileControl.touched && fileControl.hasError('emptyFile')) {
+        <p class="message error" role="alert">El archivo está vacío.</p>
+      } @else if (parseError()) {
+        <p class="message error" role="alert">{{ parseError() }}</p>
+      }
+
+      @if (serverErrors().length > 0) {
+        <ul class="message error" role="alert">
+          @for (error of serverErrors(); track error) {
+            <li>{{ error }}</li>
+          }
+        </ul>
+      }
+    </mat-card-content>
+
+    @if (uploading()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+  </mat-card>
+
+  @if (result(); as uploaded) {
+    <mat-card appearance="outlined" class="result">
+      <mat-card-content class="result-content">
+        <mat-icon class="result-icon">check_circle</mat-icon>
+        <span>
+          <strong>{{ uploaded.fileName }}</strong> cargado:
+          {{ uploaded.insertedCount }} registros insertados.
+        </span>
+        <span class="spacer"></span>
+        <a mat-button routerLink="/procesar">Ir a procesar</a>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  @if (preview(); as data) {
+    <mat-card appearance="outlined" class="preview">
+      <mat-card-header>
+        <mat-card-title>Previsualización</mat-card-title>
+        <mat-card-subtitle>{{ data.rows.length }} registros en el archivo</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="table-container">
+          <table mat-table [dataSource]="pageRows()">
+            <ng-container matColumnDef="#">
+              <th mat-header-cell *matHeaderCellDef>#</th>
+              <td mat-cell *matCellDef="let row; let i = index">{{ pageOffset() + i + 1 }}</td>
+            </ng-container>
+
+            @for (header of data.headers; track header; let column = $index) {
+              <ng-container [matColumnDef]="header">
+                <th mat-header-cell *matHeaderCellDef>{{ header }}</th>
+                <td mat-cell *matCellDef="let row">{{ row[column] }}</td>
+              </ng-container>
+            }
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns()"></tr>
+          </table>
+        </div>
+
+        <mat-paginator
+          [length]="data.rows.length"
+          [pageIndex]="pageIndex()"
+          [pageSize]="pageSize()"
+          [pageSizeOptions]="pageSizeOptions"
+          showFirstLastButtons
+          aria-label="Páginas de la previsualización"
+          (page)="onPageChange($event)"
+        />
+      </mat-card-content>
+    </mat-card>
+  }
+</section>
