@@ -3,9 +3,15 @@
 
   <nav class="nav" aria-label="Navegación principal">
     @for (link of links; track link.path) {
-      <a mat-button [routerLink]="link.path" routerLinkActive="active" ariaCurrentWhenActive="page">
+      <a
+        mat-button
+        [routerLink]="link.path"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+        [attr.aria-label]="link.label"
+      >
         <mat-icon>{{ link.icon }}</mat-icon>
-        {{ link.label }}
+        <span class="nav-label">{{ link.label }}</span>
       </a>
     }
   </nav>

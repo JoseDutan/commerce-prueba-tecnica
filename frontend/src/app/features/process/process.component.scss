@@ -1,0 +1,32 @@
+.process-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+
+  button {
+    margin-top: 8px;
+  }
+}
+
+.result {
+  margin-top: 16px;
+}
+
+.result-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.warning {
+  color: #b3261e;
+}
+
+.success {
+  color: #1b7f3b;
+}

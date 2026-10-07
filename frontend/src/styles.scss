@@ -37,3 +37,8 @@ body {
   --mdc-snackbar-supporting-text-color: #fff;
   --mat-snack-bar-button-color: #fff;
 }
+
+/* Los iconos no se encogen cuando el texto contiguo ocupa varias líneas */
+.mat-icon {
+  flex-shrink: 0;
+}

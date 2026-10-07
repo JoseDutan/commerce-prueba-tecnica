@@ -22,3 +22,22 @@
 .nav a.active {
   background: rgba(255, 255, 255, 0.18);
 }
+
+/* En pantallas estrechas la navegación muestra solo los iconos */
+@media (max-width: 600px) {
+  .toolbar {
+    gap: 8px;
+  }
+
+  .nav a {
+    min-width: 0;
+  }
+
+  .nav a mat-icon {
+    margin-right: 0;
+  }
+
+  .nav-label {
+    display: none;
+  }
+}
