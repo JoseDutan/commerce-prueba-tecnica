@@ -39,4 +39,17 @@ public sealed class CommerceService : ICommerceService
 
         return new UploadResultDto(name, inserted);
     }
+
+    public async Task<ProcessResultDto> ProcessAsync(DateOnly processDate, CancellationToken cancellationToken)
+    {
+        var quarantined = await _repository.ProcessAsync(processDate, cancellationToken);
+
+        _logger.LogInformation("Fecha {ProcessDate:yyyy-MM-dd} procesada: {Quarantined} registros a cuarentena",
+            processDate, quarantined);
+
+        return new ProcessResultDto(processDate, quarantined);
+    }
+
+    public Task<IReadOnlyList<QuarantineRecordDto>> GetQuarantineAsync(CancellationToken cancellationToken)
+        => _repository.GetQuarantineAsync(cancellationToken);
 }

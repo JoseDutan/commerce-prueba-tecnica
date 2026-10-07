@@ -12,4 +12,14 @@ public interface ICommerceService
     /// </summary>
     /// <exception cref="Exceptions.ValidationException">Nombre inválido, archivo vacío o mal formado.</exception>
     Task<UploadResultDto> UploadAsync(string fileName, Stream content, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Procesa los comercios de un día: los inválidos pasan a cuarentena.
+    /// </summary>
+    Task<ProcessResultDto> ProcessAsync(DateOnly processDate, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Lista los comercios en cuarentena con su motivo.
+    /// </summary>
+    Task<IReadOnlyList<QuarantineRecordDto>> GetQuarantineAsync(CancellationToken cancellationToken);
 }

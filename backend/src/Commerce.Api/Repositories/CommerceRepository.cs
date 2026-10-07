@@ -1,4 +1,5 @@
 using System.Data;
+using Commerce.Api.Dtos;
 using Commerce.Api.Models;
 using Dapper;
 
@@ -29,6 +30,30 @@ public sealed class CommerceRepository : ICommerceRepository
             parameters,
             commandType: CommandType.StoredProcedure,
             cancellationToken: cancellationToken));
+    }
+
+    public async Task<int> ProcessAsync(DateOnly processDate, CancellationToken cancellationToken)
+    {
+        var parameters = new DynamicParameters();
+        parameters.Add("@processdate", processDate.ToDateTime(TimeOnly.MinValue), DbType.Date);
+
+        await using var connection = _connectionFactory.Create();
+        return await connection.ExecuteScalarAsync<int>(new CommandDefinition(
+            "dbo.sp_process_commerce",
+            parameters,
+            commandType: CommandType.StoredProcedure,
+            cancellationToken: cancellationToken));
+    }
+
+    public async Task<IReadOnlyList<QuarantineRecordDto>> GetQuarantineAsync(CancellationToken cancellationToken)
+    {
+        await using var connection = _connectionFactory.Create();
+        var records = await connection.QueryAsync<QuarantineRecordDto>(new CommandDefinition(
+            "dbo.sp_get_commerce_quarantine",
+            commandType: CommandType.StoredProcedure,
+            cancellationToken: cancellationToken));
+
+        return records.AsList();
     }
 
     /// <summary>

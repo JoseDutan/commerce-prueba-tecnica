@@ -47,4 +47,37 @@ public sealed class CommerceController : ControllerBase
 
         return Ok(result);
     }
+
+    /// <summary>
+    /// Procesa los comercios de una fecha: los que incumplen las validaciones se
+    /// eliminan de commerce y se insertan en commerce_quarantine con su motivo.
+    /// </summary>
+    /// <param name="request">Fecha de proceso (pc_processdate).</param>
+    /// <param name="cancellationToken">Se cancela si el cliente aborta la petición.</param>
+    /// <response code="200">Cantidad de registros insertados en commerce_quarantine.</response>
+    /// <response code="400">Fecha ausente o con formato inválido.</response>
+    [HttpPost("process")]
+    [ProducesResponseType(typeof(ProcessResultDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<ProcessResultDto>> Process(ProcessRequestDto request, CancellationToken cancellationToken)
+    {
+        // [Required] garantiza que la fecha no es null al llegar aquí
+        var result = await _service.ProcessAsync(request.ProcessDate!.Value, cancellationToken);
+
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Lista los comercios en cuarentena con el motivo del rechazo.
+    /// </summary>
+    /// <param name="cancellationToken">Se cancela si el cliente aborta la petición.</param>
+    /// <response code="200">Registros de commerce_quarantine.</response>
+    [HttpGet("quarantine")]
+    [ProducesResponseType(typeof(IReadOnlyList<QuarantineRecordDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IReadOnlyList<QuarantineRecordDto>>> GetQuarantine(CancellationToken cancellationToken)
+    {
+        var records = await _service.GetQuarantineAsync(cancellationToken);
+
+        return Ok(records);
+    }
 }
