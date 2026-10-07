@@ -1,0 +1,53 @@
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+
+  /* Separa el botón de la tarjeta cuando baja de línea en pantallas estrechas */
+  button {
+    margin-bottom: 16px;
+  }
+}
+
+th.mat-mdc-header-cell,
+td.mat-mdc-cell {
+  white-space: nowrap;
+}
+
+/* El motivo es la columna clave: puede ocupar varias líneas */
+td.reasons-cell {
+  white-space: normal;
+  min-width: 320px;
+}
+
+.reasons {
+  margin: 8px 0;
+  padding-left: 18px;
+  color: #b3261e;
+}
+
+.empty-value {
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 40px 16px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.state-icon {
+  width: 48px;
+  height: 48px;
+  font-size: 48px;
+
+  &.error {
+    color: #b3261e;
+  }
+}

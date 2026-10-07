@@ -1,0 +1,119 @@
+<section class="page">
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">Cuarentena</h1>
+      <p class="page-subtitle">Comercios rechazados al procesar y el motivo de cada rechazo.</p>
+    </div>
+
+    <button mat-stroked-button type="button" [disabled]="loading()" (click)="load()">
+      <mat-icon>refresh</mat-icon>
+      Actualizar
+    </button>
+  </header>
+
+  <mat-card appearance="outlined">
+    @if (loading()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+
+    <mat-card-content>
+      @if (rows().length > 0) {
+        <div class="table-container">
+          <table mat-table [dataSource]="pageRows()">
+            <ng-container matColumnDef="pcProcessDate">
+              <th mat-header-cell *matHeaderCellDef>Fecha de proceso</th>
+              <td mat-cell *matCellDef="let row">{{ row.pcProcessDate | isoDate }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="pcTipDoc">
+              <th mat-header-cell *matHeaderCellDef>Tipo doc.</th>
+              <td mat-cell *matCellDef="let row">{{ row.pcTipDoc }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="pcNumDoc">
+              <th mat-header-cell *matHeaderCellDef>Número (numdoc)</th>
+              <td mat-cell *matCellDef="let row">
+                @if (row.pcNumDoc?.trim()) {
+                  {{ row.pcNumDoc }}
+                } @else {
+                  <span class="empty-value">(vacío)</span>
+                }
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="pcNomComRed">
+              <th mat-header-cell *matHeaderCellDef>Nombre comercial (nomcomred)</th>
+              <td mat-cell *matCellDef="let row">
+                @if (row.pcNomComRed?.trim()) {
+                  {{ row.pcNomComRed }}
+                } @else {
+                  <span class="empty-value">(vacío)</span>
+                }
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="motivo">
+              <th mat-header-cell *matHeaderCellDef>Motivo</th>
+              <td mat-cell *matCellDef="let row" class="reasons-cell">
+                <ul class="reasons">
+                  @for (reason of row.reasons; track reason) {
+                    <li>{{ reason }}</li>
+                  }
+                </ul>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="pcNomComLegal">
+              <th mat-header-cell *matHeaderCellDef>Razón social</th>
+              <td mat-cell *matCellDef="let row">{{ row.pcNomComLegal }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="pcDireccion">
+              <th mat-header-cell *matHeaderCellDef>Dirección</th>
+              <td mat-cell *matCellDef="let row">{{ row.pcDireccion }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="pcTelefono">
+              <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+              <td mat-cell *matCellDef="let row">{{ row.pcTelefono }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="pcEmail">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let row">{{ row.pcEmail }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="pcEstado">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td mat-cell *matCellDef="let row">{{ row.pcEstado }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+
+        <mat-paginator
+          [length]="rows().length"
+          [pageIndex]="pageIndex()"
+          [pageSize]="pageSize()"
+          [pageSizeOptions]="pageSizeOptions"
+          showFirstLastButtons
+          aria-label="Páginas de la cuarentena"
+          (page)="onPageChange($event)"
+        />
+      } @else if (loadFailed()) {
+        <div class="state" role="alert">
+          <mat-icon class="state-icon error">error_outline</mat-icon>
+          <p>No se pudo cargar la cuarentena.</p>
+          <button mat-flat-button type="button" (click)="load()">Reintentar</button>
+        </div>
+      } @else if (!loading()) {
+        <div class="state">
+          <mat-icon class="state-icon">inbox</mat-icon>
+          <p>No hay comercios en cuarentena.</p>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+</section>
