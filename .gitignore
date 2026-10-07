@@ -1,0 +1,22 @@
+# Secretos y configuración local (nunca versionar)
+.env
+.env.*
+appsettings.Development.json
+appsettings.*.local.json
+
+# .NET
+bin/
+obj/
+*.user
+TestResults/
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+coverage/
+
+# Editores y sistema operativo
+.vs/
+.idea/
+.DS_Store

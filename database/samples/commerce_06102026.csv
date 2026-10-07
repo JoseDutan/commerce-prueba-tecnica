@@ -1,0 +1,20 @@
+pc_processdate,pc_tipdoc,pc_numdoc,pc_nomcomred,pc_nomcomlegal,pc_direccion,pc_telefono,pc_email,pc_estado
+2026-10-06,RUC,0991234567001,Tienda La Esquina,La Esquina S.A.,Av. 9 de Octubre 123,042345678,contacto@laesquina.com,ACTIVO
+2026-10-06,RUC,0992345678001,Farmacia Central,Farmacia Central Cia. Ltda.,Calle Chile 456,042876543,info@farmaciacentral.ec,ACTIVO
+2026-10-06,CED,0912345678,Panadería El Trigal,Juan Pérez,Cdla. Alborada Mz 10,0991112233,eltrigal@mail.com,ACTIVO
+2026-10-06,RUC,0993456789001,Supermercado Don Pepe,Don Pepe S.A.,Av. Las Aguas 789,042998877,donpepe@mail.com,ACTIVO
+2026-10-06,RUC,0994567890001,,Comercial Sin Nombre S.A.,Calle Sucre 321,042112233,sinnombre@mail.com,ACTIVO
+2026-10-06,RUC,,Ferretería El Clavo,El Clavo Cia. Ltda.,Av. Quito 654,042334455,elclavo@mail.com,ACTIVO
+2026-10-06,RUC,09956789ABC001,Papelería El Lápiz,El Lápiz S.A.,Calle Boyacá 987,042556677,ellapiz@mail.com,ACTIVO
+2026-10-06,RUC,0996789012-001,Librería Mundo Libro,Mundo Libro S.A.,Av. Víctor Emilio Estrada 12,042778899,mundolibro@mail.com,ACTIVO
+2026-10-06,CED,09#2345678,Zapatería Paso Firme,María López,Cdla. Kennedy Norte,0988776655,pasofirme@mail.com,ACTIVO
+2026-10-06,RUC,,,Comercial Doblemente Inválido,Calle Pichincha 100,042001122,doble@mail.com,ACTIVO
+2026-10-06,RUC,ABC123,,Otro Doble Error S.A.,Calle Luque 200,042003344,doble2@mail.com,ACTIVO
+2026-10-06,CED,0923456789,   ,Espacios en Blanco,Av. Francisco de Orellana,0977665544,espacios@mail.com,ACTIVO
+2026-10-06,RUC,   ,Licorería La Noche,La Noche S.A.,Calle Rumichaca 300,042005566,lanoche@mail.com,ACTIVO
+2026-10-06,RUC,0997890123001,Restaurante Sabor Costeño,Sabor Costeño S.A.,Malecón 2000 Local 5,042007788,sabor@mail.com,ACTIVO
+2026-10-06,CED,0934567890,Ferretería Los Álamos,Carlos Mora,Cdla. Urdesa Central,0966554433,alamos@mail.com,ACTIVO
+2026-10-07,RUC,0998901234001,Boutique Elegancia,Elegancia S.A.,C.C. Policentro Local 10,042009900,elegancia@mail.com,ACTIVO
+2026-10-07,RUC,0999012345001,Tienda Don Luis,Don Luis Cia. Ltda.,Av. Juan Tanca Marengo,042011223,donluis@mail.com,ACTIVO
+2026-10-07,RUC,09900X2345001,Bazar El Ahorro,El Ahorro S.A.,Calle Eloy Alfaro 77,042013344,ahorro@mail.com,ACTIVO
+2026-10-07,RUC,0990123456001,,Sin Nombre Día 7,Calle Gómez Rendón 15,042015566,sn7@mail.com,ACTIVO
