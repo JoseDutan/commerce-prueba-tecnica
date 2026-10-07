@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Provider } from '@angular/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 
 /** Textos en español para todos los paginadores de la aplicación. */
@@ -20,3 +20,10 @@ export class SpanishPaginatorIntl extends MatPaginatorIntl {
     return `${start} – ${end} de ${length}`;
   };
 }
+
+/**
+ * Proveedor para los componentes que usan un paginador. Se declara en cada
+ * pantalla (carga diferida) y no en el arranque, para no llevar el paginador
+ * al paquete inicial.
+ */
+export const SPANISH_PAGINATOR_PROVIDER: Provider = { provide: MatPaginatorIntl, useClass: SpanishPaginatorIntl };

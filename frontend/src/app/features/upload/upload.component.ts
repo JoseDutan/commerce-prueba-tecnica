@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
 import { finalize } from 'rxjs';
 
 import { ApiProblem, UploadResult } from '../../core/models/commerce.models';
+import { SPANISH_PAGINATOR_PROVIDER } from '../../core/i18n/spanish-paginator-intl';
 import { CommerceApiService } from '../../core/services/commerce-api.service';
 import { commerceFileValidator } from '../../shared/utils/commerce-file.validators';
 import { CsvPreview, CsvPreviewError, parseCsvPreview } from '../../shared/utils/csv-preview.parser';
@@ -26,6 +27,7 @@ const ROW_NUMBER_COLUMN = '#';
 @Component({
   selector: 'app-upload',
   standalone: true,
+  providers: [SPANISH_PAGINATOR_PROVIDER],
   imports: [
     ReactiveFormsModule,
     RouterLink,

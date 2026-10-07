@@ -9,6 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { finalize } from 'rxjs';
 
 import { QuarantineRecord } from '../../core/models/commerce.models';
+import { SPANISH_PAGINATOR_PROVIDER } from '../../core/i18n/spanish-paginator-intl';
 import { CommerceApiService } from '../../core/services/commerce-api.service';
 import { IsoDatePipe } from '../../shared/pipes/iso-date.pipe';
 
@@ -27,6 +28,7 @@ interface QuarantineRow extends QuarantineRecord {
 @Component({
   selector: 'app-quarantine',
   standalone: true,
+  providers: [SPANISH_PAGINATOR_PROVIDER],
   imports: [
     MatButtonModule,
     MatCardModule,
