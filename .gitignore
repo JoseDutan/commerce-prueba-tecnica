@@ -1,7 +1,6 @@
 # Secretos y configuración local (nunca versionar)
 .env
 .env.*
-!.env.example
 appsettings.Development.json
 appsettings.*.local.json
 
