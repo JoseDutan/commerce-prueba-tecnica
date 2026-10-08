@@ -1,5 +1,5 @@
 /*
-  06 - sp_get_commerce_quarantine: lista los comercios en cuarentena
+  07 - sp_get_commerce_quarantine: lista los comercios en cuarentena
   con su motivo, ordenados por fecha de proceso.
 */
 USE CommerceDb;

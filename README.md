@@ -145,7 +145,7 @@ Los valores con solo espacios cuentan como vacíos. Si un registro incumple vari
 1. El backend es .NET (la mención a SpringBoot del enunciado se consideró un error).
 2. La fecha del nombre del archivo se valida (patrón y fecha real), pero no se exige que coincida con `pc_processdate`: un archivo puede traer varias fechas de proceso.
 3. Estructura del CSV: UTF-8, separado por comas, con cabecera `pc_processdate,pc_tipdoc,pc_numdoc,pc_nomcomred,pc_nomcomlegal,pc_direccion,pc_telefono,pc_email,pc_estado`.
-4. `commerce` tiene exactamente las columnas del CSV. `commerce_quarantine` añade `id` y `motivo`.
+4. `commerce` tiene exactamente las columnas del CSV. `commerce_quarantine` se crea con esas mismas columnas más un `id`, y la columna `motivo` se agrega con un `ALTER TABLE` en `03_alter_commerce_quarantine_add_motivo.sql`, como indica el enunciado.
 5. Un archivo con cabecera incorrecta, columnas faltantes, textos que exceden la longitud de la columna o `pc_processdate` no válido se rechaza completo con `400` y el detalle por línea. Las reglas de negocio (`nomcomred`, `numdoc`) no bloquean la carga: se evalúan al procesar.
 6. `pc_numdoc` válido significa solo dígitos; un espacio intermedio cuenta como carácter especial y una letra acentuada cuenta como letra.
 7. Procesar una fecha sin registros devuelve `200` con `quarantinedCount: 0`.

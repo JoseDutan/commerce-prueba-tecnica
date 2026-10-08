@@ -26,7 +26,8 @@ BEGIN
 END
 GO
 
--- Registros rechazados al procesar: columnas de commerce + motivo
+-- Registros rechazados al procesar: mismas columnas que commerce.
+-- La columna motivo se agrega en 03_alter_commerce_quarantine_add_motivo.sql
 IF OBJECT_ID(N'dbo.commerce_quarantine', N'U') IS NULL
 BEGIN
     CREATE TABLE dbo.commerce_quarantine
@@ -41,8 +42,7 @@ BEGIN
         pc_direccion   NVARCHAR(300) NULL,
         pc_telefono    NVARCHAR(30)  NULL,
         pc_email       NVARCHAR(150) NULL,
-        pc_estado      NVARCHAR(20)  NULL,
-        motivo         NVARCHAR(500) NOT NULL
+        pc_estado      NVARCHAR(20)  NULL
     );
 END
 GO

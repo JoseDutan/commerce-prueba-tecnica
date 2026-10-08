@@ -1,5 +1,5 @@
 /*
-  03 - Tipo de tabla (Table-Valued Parameter) para enviar todas las filas
+  04 - Tipo de tabla (Table-Valued Parameter) para enviar todas las filas
   del CSV a sp_create_commerce en una sola llamada.
   Re-ejecutable: el tipo se crea solo si no existe.
 

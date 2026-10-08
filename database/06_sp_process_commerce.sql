@@ -1,5 +1,5 @@
 /*
-  05 - sp_process_commerce: valida los comercios de una fecha de proceso.
+  06 - sp_process_commerce: valida los comercios de una fecha de proceso.
 
   Reglas (los valores con solo espacios cuentan como vacíos):
     - pc_nomcomred no vacío.
